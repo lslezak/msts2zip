@@ -1,5 +1,6 @@
 
 import { ungzip } from "pako";
+import JSZip from "jszip";
 
 let index = 0;
 const decoder = new TextDecoder("utf-16le");
@@ -13,13 +14,8 @@ function read_int(data) {
 
 function read_header(data) {
   const len = read_int(data);
-
-  console.log("length: ", len);
-
   const name = new Uint8Array(data.buffer, index, (len - 1) * 2);
-
   index += 2 * len;
-
   return decoder.decode(name);
 }
 
@@ -31,13 +27,10 @@ function read_file(data) {
   // change file path separator
   const file_name = decoder.decode(name).replaceAll("\\", "/");
   console.log("file_name: ", file_name);
-
   index += 2 * name_len;
 
   const content = new Uint8Array(data.buffer, index, file_len);
-
   console.log("content", content);
-
   index += file_len;
 
   return [name, content];
@@ -69,4 +62,26 @@ export function msts2zip(input) {
   }
 
   console.log("Found files: ", Object.keys(content).length);
+
+  let dataSize = 0;
+  const zip = new JSZip();
+  Object.keys(content).forEach((name) => {
+    zip.file(name, content[name], { binary: true });
+    dataSize += content[name].length;
+  });
+
+  const zipfile = zip.generateAsync({
+    type: "uint8array",
+    compression: "DEFLATE",
+    compressionOptions: {
+      level: 9
+    }
+  });
+
+  return {
+    route,
+    files: Object.keys(content).length,
+    zipfile,
+    dataSize
+  };
 }

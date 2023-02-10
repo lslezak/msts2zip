@@ -25,8 +25,13 @@ export default function InputFileSelection() {
     reader.onload = (ev) => {
       const content = ev.target.result;
       console.log("Loaded: ", content);
-      setIsLoading(false);
-      msts2zip(content);
+      const result = msts2zip(content);
+      console.log("result", result);
+
+      result.zipfile.then((zip) => {
+        console.log("zip content", zip);
+        setIsLoading(false);
+      });
     };
 
     reader.readAsArrayBuffer(value);
