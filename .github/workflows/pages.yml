@@ -45,6 +45,9 @@ jobs:
       - name: Build the Page
         run: npm run build
 
+      - name: Build ZIP archive
+        run: (cd dist && zip msts2zip.zip *.html *.js *.css fonts/RedHatDisplay-Medium* fonts/RedHatText-Regular* fonts/RedHatDisplay-Bold* fonts/RedHatText-Medium*)
+
       - name: Setup Pages
         uses: actions/configure-pages@v1
 
