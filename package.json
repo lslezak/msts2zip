@@ -1,6 +1,6 @@
 {
   "name": "msts2zip",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "Convert MSTS Activity Files to Plain ZIP to Use them in Open Rails",
   "repository": "https://github.com/lslezak/msts2zip",
   "license": "MIT",
@@ -49,6 +49,7 @@
     "mini-css-extract-plugin": "^1.6.1",
     "pako": "^2.1.0",
     "prettier": "^2.3.1",
+    "pretty-bytes": "^6.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "regenerator-runtime": "^0.13.7",

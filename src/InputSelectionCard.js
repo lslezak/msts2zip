@@ -4,7 +4,7 @@ import { Card, CardTitle, CardBody, CardHeader } from "@patternfly/react-core";
 
 import InputFileSelection from "./InputFileSelection";
 
-export default function InputSelectionCard({ dataCallback }) {
+export default function InputSelectionCard() {
   return (
     <Card isFlat isRounded>
       <CardHeader>
@@ -13,7 +13,7 @@ export default function InputSelectionCard({ dataCallback }) {
         </CardTitle>
       </CardHeader>
       <CardBody>
-        <InputFileSelection dataCallback={dataCallback} />
+        <InputFileSelection />
       </CardBody>
     </Card>
   );

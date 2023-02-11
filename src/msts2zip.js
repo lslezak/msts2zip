@@ -30,21 +30,17 @@ function read_file(data) {
   index += 2 * name_len;
 
   const content = new Uint8Array(data.buffer, index, file_len);
-  console.log("content", content);
   index += file_len;
 
   return [name, content];
 }
 
-export function msts2zip(input) {
+export function msts2zip(input, name) {
   const data = ungzip(new Uint8Array(input));
-
-  console.log("Unpacked: ", data);
   index = 0;
 
   // read the header - the route name
   const route = read_header(data);
-
   console.log("Route: ", route);
 
   // then there are 2 more headers, usually with the same content
@@ -70,7 +66,7 @@ export function msts2zip(input) {
     dataSize += content[name].length;
   });
 
-  const zipfile = zip.generateAsync({
+  const zipFile = zip.generateAsync({
     type: "uint8array",
     compression: "DEFLATE",
     compressionOptions: {
@@ -78,10 +74,13 @@ export function msts2zip(input) {
     }
   });
 
+  const fileName = name.replace(/\.apk$/i, "") + "_converted.zip";
+
   return {
+    fileName,
     route,
     files: Object.keys(content).length,
-    zipfile,
+    zipFile,
     dataSize
   };
 }

@@ -1,22 +1,11 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Card, CardHeader, Page, PageSection, Text, TextContent, TextVariants } from "@patternfly/react-core";
 
 import InputSelectionCard from "./InputSelectionCard";
-
-const initialState = {
-  name: null,
-  data: null,
-};
+import pkg from "../package.json";
 
 export default function App() {
-  const [state, setState] = useState(initialState);
-
-  const dataCallback = (data, name) => {
-    console.log("Loaded data from", name);
-    setState({ ...state, data, name });
-  };
-
   return (
     <>
       <Page>
@@ -25,12 +14,17 @@ export default function App() {
             <CardHeader>
               <TextContent>
                 <Text component={TextVariants.h1}>MSTS Activity Converter</Text>
+                <Text>{pkg.description}</Text>
               </TextContent>
             </CardHeader>
           </Card>
         </PageSection>
         <PageSection>
-          <InputSelectionCard dataCallback={dataCallback} />
+          <InputSelectionCard />
+        </PageSection>
+        <PageSection isFilled />
+        <PageSection isFilled={false} sticky="bottom" variant="light">
+          <Text>{pkg.name}-{pkg.version}</Text>
         </PageSection>
       </Page>
     </>
