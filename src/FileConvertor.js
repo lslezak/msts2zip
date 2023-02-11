@@ -12,14 +12,16 @@ export default function FileConvertor() {
   const [convertedData, setConvertedData] = useState(null);
 
   const handleChange = (value, filename, _event) => {
-    console.log(value);
-    console.log(filename);
+    if (process.env.NODE_ENV !== "production") {
+      console.log(filename, value);
+    }
+
     setConvertedData(null);
-    setIsLoading(true);
     setValue(value);
     setFilename(filename);
 
-    if (filename) {
+    if (filename && filename !== "" && value && value !== "") {
+      setIsLoading(true);
       // HTML5 FileReader
       const reader = new FileReader();
       reader.onload = (ev) => {
@@ -44,6 +46,9 @@ export default function FileConvertor() {
           hideDefaultPreview="true"
           onChange={handleChange}
           browseButtonText="Select File"
+          dropzoneProps={{
+            accept: ".apk"
+          }}
         />
 
         { convertedData &&

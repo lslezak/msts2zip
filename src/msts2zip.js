@@ -26,7 +26,7 @@ function read_file(data) {
   const name = new Uint8Array(data.buffer.slice(index, index + ((name_len - 1) * 2)));
   // change file path separator
   const file_name = decoder.decode(name).replaceAll("\\", "/");
-  console.log("file_name: ", file_name);
+  if (process.env.NODE_ENV !== "production") console.log("file_name: ", file_name);
   index += 2 * name_len;
 
   const content = new Uint8Array(data.buffer, index, file_len);
@@ -41,7 +41,7 @@ export function msts2zip(input, name) {
 
   // read the header - the route name
   const route = read_header(data);
-  console.log("Route: ", route);
+  if (process.env.NODE_ENV !== "production") console.log("Route: ", route);
 
   // then there are 2 more headers, usually with the same content
   read_header(data);
@@ -57,7 +57,9 @@ export function msts2zip(input, name) {
     content[file] = val;
   }
 
-  console.log("Found files: ", Object.keys(content).length);
+  if (process.env.NODE_ENV !== "production") {
+    console.log("Found files: ", Object.keys(content).length);
+  }
 
   let dataSize = 0;
   const zip = new JSZip();

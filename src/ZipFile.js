@@ -13,7 +13,9 @@ export default function ZipFile({ data }) {
       setIsLoading(true);
 
       data.zipFile.then((zipData) => {
-        console.log("ZIP size", zipData.length);
+        if (process.env.NODE_ENV !== "production") {
+          console.log("ZIP size", zipData.length);
+        }
         const blob = new Blob([zipData], { type: "application/zip" });
         const urlHref = URL.createObjectURL(blob);
         setZipLength(zipData.length);
