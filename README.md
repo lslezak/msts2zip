@@ -7,18 +7,26 @@ This is a converter for the Microsoft Train Simulator (MSTS) APK activity files.
 It can convert the APK files to the more commonly used ZIP format.
 
 You can use it with [OpenRails](http://openrails.org/)
-or when your original MSTS unpacking utility does not work properly.
+or when your original MSTS unpacking utility does not work properly. After
+downloading the converted ZIP activity file unpack it into your MSTS base
+directory, or if you use OpenRails, then into the selected profile.
 
 ## The On-line Version
 
-## Unpacking the ZIP File
+You can access the converter on-line at https://lslezak.github.io/msts2zip/.
 
-After downloading the converted ZIP file unpack it into your MSTS base directory,
-or if you use OpenRails, then into the selected profile.
+## Local Version
 
-## Usage
+You can download the converter from https://lslezak.github.io/msts2zip/msts2zip.zip
+and use it locally from your machine. Just unpack the `msts2zip.zip` archive
+and open the `index.html` file in a web browser.
 
-### Installation
+## Implementation Notes
+
+The conversion happens directly in your browser the activity file is processed
+locally. That means you do not even need Internet connection for the converter.
+
+## Building from Sources
 
 First install the needed NPM packages:
 
@@ -26,15 +34,15 @@ First install the needed NPM packages:
 npm install
 ```
 
-And build the page from the sources:
+Then build the page from the sources:
 
 ```
 npm run build
 ```
 
-The page is saved in the `dist/` subdirectory.
+The built page is saved in the `dist/` subdirectory.
 
-### Development
+## Development
 
 To run the web application in development mode run
 
@@ -43,4 +51,5 @@ HOST=localhost NODE_ENV=development npm run start:dev
 ```
 
 It will automatically open the http://localhost:9000 page in your preferred
-browser.
+browser. This also enables the hot reload feature so the page is automatically
+updated in the browser whenever you change a source file.
