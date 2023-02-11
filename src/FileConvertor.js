@@ -10,6 +10,11 @@ export default function FileConvertor() {
   const [filename, setFilename] = useState("");
   const [loading, setIsLoading] = useState(false);
   const [convertedData, setConvertedData] = useState(null);
+  const [isRejected, setIsRejected] = useState(false);
+
+  const handleFileRejected = () => {
+    setIsRejected(true);
+  };
 
   const handleChange = (value, filename, _event) => {
     if (process.env.NODE_ENV !== "production") {
@@ -19,6 +24,7 @@ export default function FileConvertor() {
     setConvertedData(null);
     setValue(value);
     setFilename(filename);
+    setIsRejected(false);
 
     if (filename && filename !== "" && value && value !== "") {
       setIsLoading(true);
@@ -26,9 +32,16 @@ export default function FileConvertor() {
       const reader = new FileReader();
       reader.onload = (ev) => {
         const content = ev.target.result;
-        const result = msts2zip(content, filename);
-        setConvertedData(result);
-        setIsLoading(false);
+
+        try {
+          const result = msts2zip(content, filename);
+          setConvertedData(result);
+        } catch (error) {
+          if (process.env.NODE_ENV !== "production") console.log(error);
+          setIsRejected(true);
+        } finally {
+          setIsLoading(false);
+        }
       };
 
       reader.readAsArrayBuffer(value);
@@ -37,7 +50,12 @@ export default function FileConvertor() {
 
   return (
     <>
-      <FormGroup role="group" label="Activity file">
+      <FormGroup
+        role="group"
+        label="Activity file"
+        helperTextInvalid="Invalid file"
+        validated={isRejected ? "error" : "default"}
+      >
         <FileUpload
           isDisabled={loading}
           value={value}
@@ -47,7 +65,8 @@ export default function FileConvertor() {
           onChange={handleChange}
           browseButtonText="Select File"
           dropzoneProps={{
-            accept: ".apk"
+            accept: ".apk",
+            onDropRejected: handleFileRejected
           }}
         />
 

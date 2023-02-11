@@ -24,7 +24,11 @@ export default function ZipFile({ data }) {
     }
 
     return () => {
-      if (href) URL.revokeObjectURL(href);
+      if (href) {
+        if (process.env.NODE_ENV !== "production") console.log("Blob URL cleanup");
+
+        URL.revokeObjectURL(href);
+      }
     };
   }, [isLoading, data.zipFile, href]);
 
