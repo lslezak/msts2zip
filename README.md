@@ -1,5 +1,8 @@
 # MSTS Activity to ZIP Converter
 
+[![Publish GitHub Pages](https://github.com/lslezak/msts2zip/actions/workflows/pages.yml/badge.svg)](https://github.com/lslezak/msts2zip/actions/workflows/pages.yml)
+[![Eslint](https://github.com/lslezak/msts2zip/actions/workflows/eslint.yml/badge.svg)](https://github.com/lslezak/msts2zip/actions/workflows/eslint.yml)
+
 This is a converter for the Microsoft Train Simulator (MSTS) APK activity files.
 It can convert the APK files to the more commonly used ZIP format.
 
