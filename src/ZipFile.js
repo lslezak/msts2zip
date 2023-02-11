@@ -13,7 +13,7 @@ export default function ZipFile({ data }) {
       setIsLoading(true);
 
       data.zipFile.then((zipData) => {
-        console.log("zipData", zipData);
+        console.log("ZIP size", zipData.length);
         const blob = new Blob([zipData], { type: "application/zip" });
         const urlHref = URL.createObjectURL(blob);
         setZipLength(zipData.length);
@@ -34,7 +34,10 @@ export default function ZipFile({ data }) {
       { zipLength &&
         <Text>ZIP Size: {prettyBytes(zipLength)}</Text> }
       { href &&
-        <Button component="a" variant="primary" href={href} download={data.fileName}>Download ZIP File</Button> }
+        <>
+          <br />
+          <Button component="a" variant="primary" href={href} download={data.fileName}>Download ZIP File</Button>
+        </> }
     </>
   );
 }

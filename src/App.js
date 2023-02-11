@@ -1,8 +1,7 @@
 
 import React from "react";
-import { Card, CardHeader, Page, PageSection, Text, TextContent, TextVariants } from "@patternfly/react-core";
-
-import InputSelectionCard from "./InputSelectionCard";
+import { Card, CardTitle, CardBody, CardHeader, Page, PageSection, Text, TextContent, TextVariants } from "@patternfly/react-core";
+import FileConvertor from "./FileConvertor";
 import pkg from "../package.json";
 
 export default function App() {
@@ -20,10 +19,19 @@ export default function App() {
           </Card>
         </PageSection>
         <PageSection>
-          <InputSelectionCard />
+          <Card isFlat isRounded>
+            <CardHeader>
+              <CardTitle component="h2">
+                Select the APK activity file
+              </CardTitle>
+            </CardHeader>
+            <CardBody>
+              <FileConvertor />
+            </CardBody>
+          </Card>
         </PageSection>
         <PageSection isFilled />
-        <PageSection isFilled={false} sticky="bottom" variant="light">
+        <PageSection isFilled={false} variant="light">
           <Text>{pkg.name}-{pkg.version}</Text>
         </PageSection>
       </Page>

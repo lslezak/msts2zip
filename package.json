@@ -1,7 +1,7 @@
 {
   "name": "msts2zip",
   "version": "0.5.0",
-  "description": "Convert MSTS Activity Files to Plain ZIP to Use them in Open Rails",
+  "description": "Converts MSTS activity files to ZIP files to use them in Open Rails",
   "repository": "https://github.com/lslezak/msts2zip",
   "license": "MIT",
   "private": true,

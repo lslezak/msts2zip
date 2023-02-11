@@ -1,11 +1,11 @@
 
 import React, { useState } from "react";
-import { Button, FileUpload, FormGroup } from "@patternfly/react-core";
+import { FileUpload, FormGroup } from "@patternfly/react-core";
 
 import { msts2zip } from "./msts2zip";
 import ZipFile from "./ZipFile";
 
-export default function InputFileSelection() {
+export default function FileConvertor() {
   const [value, setValue] = useState("");
   const [filename, setFilename] = useState("");
   const [loading, setIsLoading] = useState(false);
@@ -14,25 +14,23 @@ export default function InputFileSelection() {
   const handleChange = (value, filename, _event) => {
     console.log(value);
     console.log(filename);
+    setConvertedData(null);
+    setIsLoading(true);
     setValue(value);
     setFilename(filename);
-  };
 
-  const load = () => {
-    setIsLoading(true);
+    if (filename) {
+      // HTML5 FileReader
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const content = ev.target.result;
+        const result = msts2zip(content, filename);
+        setConvertedData(result);
+        setIsLoading(false);
+      };
 
-    // HTML5 FileReader
-    const reader = new FileReader();
-
-    reader.onload = (ev) => {
-      const content = ev.target.result;
-
-      const result = msts2zip(content, filename);
-      setConvertedData(result);
-      setIsLoading(false);
-    };
-
-    reader.readAsArrayBuffer(value);
+      reader.readAsArrayBuffer(value);
+    }
   };
 
   return (
@@ -47,11 +45,12 @@ export default function InputFileSelection() {
           onChange={handleChange}
           browseButtonText="Select File"
         />
-        <br />
-        <Button variant="primary" onClick={load} isLoading={loading} isDisabled={filename === "" || loading}>Convert File</Button>
 
         { convertedData &&
-          <ZipFile data={convertedData} />}
+          <>
+            <br />
+            <ZipFile data={convertedData} />
+          </> }
       </FormGroup>
     </>
   );

@@ -32,7 +32,7 @@ function read_file(data) {
   const content = new Uint8Array(data.buffer, index, file_len);
   index += file_len;
 
-  return [name, content];
+  return [file_name, content];
 }
 
 export function msts2zip(input, name) {
