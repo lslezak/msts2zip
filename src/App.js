@@ -22,7 +22,7 @@ export default function App() {
           <Card isFlat isRounded>
             <CardHeader>
               <CardTitle component="h2">
-                Select the APK activity file
+                Activity Converter
               </CardTitle>
             </CardHeader>
             <CardBody>

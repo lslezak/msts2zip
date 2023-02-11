@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { FileUpload, FormGroup } from "@patternfly/react-core";
+import { FileUpload, Form, FormGroup } from "@patternfly/react-core";
 
 import { msts2zip } from "./msts2zip";
 import ZipFile from "./ZipFile";
@@ -49,11 +49,11 @@ export default function FileConvertor() {
   };
 
   return (
-    <>
+    <Form>
       <FormGroup
         role="group"
         label="Activity file"
-        helperTextInvalid="Invalid file"
+        helperTextInvalid="Invalid activity file"
         validated={isRejected ? "error" : "default"}
       >
         <FileUpload
@@ -62,6 +62,7 @@ export default function FileConvertor() {
           filename={filename}
           filenamePlaceholder="Drag and drop an activity file or select one"
           hideDefaultPreview="true"
+          validated={isRejected ? "error" : "default"}
           onChange={handleChange}
           browseButtonText="Select File"
           dropzoneProps={{
@@ -76,6 +77,6 @@ export default function FileConvertor() {
             <ZipFile data={convertedData} />
           </> }
       </FormGroup>
-    </>
+    </Form>
   );
 }
