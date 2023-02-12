@@ -1,40 +1,30 @@
 
 import React from "react";
-import { Card, CardTitle, CardBody, CardHeader, Page, PageSection, Text, TextContent, TextVariants } from "@patternfly/react-core";
-import FileConvertor from "./FileConvertor";
-import pkg from "../package.json";
+import { Page, PageSection } from "@patternfly/react-core";
+import { useTranslation } from "react-i18next";
+
+import FooterSection from "./FooterSection";
+import HeaderSection from "./HeaderSection";
+import MainSection from "./MainSection";
 
 export default function App() {
+  const { t } = useTranslation("texts");
+
+  // translate also the page title
+  document.title = t("app.title");
+
   return (
-    <>
-      <Page>
-        <PageSection>
-          <Card>
-            <CardHeader>
-              <TextContent>
-                <Text component={TextVariants.h1}>MSTS Activity Converter</Text>
-                <Text>{pkg.description}</Text>
-              </TextContent>
-            </CardHeader>
-          </Card>
-        </PageSection>
-        <PageSection>
-          <Card isFlat isRounded>
-            <CardHeader>
-              <CardTitle component="h2">
-                Activity Converter
-              </CardTitle>
-            </CardHeader>
-            <CardBody>
-              <FileConvertor />
-            </CardBody>
-          </Card>
-        </PageSection>
-        <PageSection isFilled />
-        <PageSection isFilled={false} variant="light">
-          <Text>{pkg.name}-{pkg.version}</Text>
-        </PageSection>
-      </Page>
-    </>
+    <Page>
+      <PageSection>
+        <HeaderSection />
+      </PageSection>
+      <PageSection>
+        <MainSection />
+      </PageSection>
+      <PageSection isFilled />
+      <PageSection isFilled={false} variant="light">
+        <FooterSection />
+      </PageSection>
+    </Page>
   );
 }

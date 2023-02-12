@@ -1,0 +1,30 @@
+{
+  "app": {
+    "title": "MSTS Activity Converter",
+    "description" : "Converts MSTS activity files to ZIP files to use them in Open Rails",
+    "card": {
+      "title": "Activity Converter"
+    }
+  },
+  "fileconvertor": {
+    "form": {
+      "file": {
+        "label": "Activity file",
+        "error": "Invalid activity file",
+        "placeholder": "Drag and drop an activity file or select one",
+        "button": {
+          "browse": "Select File",
+          "clear": "Clear"
+        }
+
+      }
+    }
+  },
+  "zipfile": {
+    "button": "Download ZIP File",
+    "route": "Route:",
+    "files": "Files:",
+    "datasize": "Data Size:",
+    "zipsize": "ZIP Size:"
+  }
+}

@@ -1,12 +1,15 @@
 
 import React, { useEffect, useState } from "react";
 import { Button, Text } from "@patternfly/react-core";
+import { useTranslation } from "react-i18next";
 import prettyBytes from "pretty-bytes";
 
 export default function ZipFile({ data }) {
   const [zipLength, setZipLength] = useState(null);
   const [href, setHref] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { t } = useTranslation("texts");
 
   useEffect(() => {
     if (!isLoading) {
@@ -34,15 +37,15 @@ export default function ZipFile({ data }) {
 
   return (
     <>
-      <Text>Route: {data.route}</Text>
-      <Text>Files: {data.files}</Text>
-      <Text>Data Size: {prettyBytes(data.dataSize)}</Text>
+      <Text>{t("zipfile.route")} {data.route}</Text>
+      <Text>{t("zipfile.files")} {data.files}</Text>
+      <Text>{t("zipfile.datasize")} {prettyBytes(data.dataSize)}</Text>
       { zipLength &&
-        <Text>ZIP Size: {prettyBytes(zipLength)}</Text> }
+        <Text>{t("zipfile.zipsize")} {prettyBytes(zipLength)}</Text> }
       { href &&
         <>
           <br />
-          <Button component="a" variant="primary" href={href} download={data.fileName}>Download ZIP File</Button>
+          <Button component="a" variant="primary" href={href} download={data.fileName}>{t("zipfile.button")}</Button>
         </> }
     </>
   );

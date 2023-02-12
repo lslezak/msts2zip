@@ -53,3 +53,12 @@ HOST=localhost NODE_ENV=development npm run start:dev
 It will automatically open the http://localhost:9000 page in your preferred
 browser. This also enables the hot reload feature so the page is automatically
 updated in the browser whenever you change a source file.
+
+## Translations
+
+For translations it uses the [react-i18next](https://react.i18next.com/)
+framework. See the translations in the `src/translations/*/*.json` files
+and [tutorial](https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-react-app-with-react-i18next).
+It honors the language settings in the browser using the
+[i18next-browser-languageDetector](https://github.com/i18next/i18next-browser-languageDetector)
+plugin.

@@ -1,0 +1,29 @@
+{
+  "app": {
+    "title": "Převodník MSTS aktivit",
+    "description" : "Převádí aktivity z MSTS do ZIP souboru pro použití v Open Rails",
+    "card": {
+      "title": "Převodník aktivit"
+    }
+  },
+  "fileconvertor": {
+    "form": {
+      "file": {
+        "label": "Soubor s aktivitou",
+        "error": "Neplatný soubor s aktivitou",
+        "placeholder": "Sem pusťte soubor s aktivitou nebo vyberte soubor",
+        "button": {
+          "browse": "Vybrat soubor",
+          "clear": "Vymazat"
+        }
+      }
+    }
+  },
+  "zipfile": {
+    "button": "Stáhnout ZIP",
+    "route": "Trať:",
+    "files": "Soubory:",
+    "datasize": "Velikost dat:",
+    "zipsize": "Velikost ZIP souboru:"
+  }
+}

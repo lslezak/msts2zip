@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import { FileUpload, Form, FormGroup } from "@patternfly/react-core";
+import { useTranslation } from "react-i18next";
 
 import { msts2zip } from "./msts2zip";
 import ZipFile from "./ZipFile";
@@ -11,6 +12,8 @@ export default function FileConvertor() {
   const [loading, setIsLoading] = useState(false);
   const [convertedData, setConvertedData] = useState(null);
   const [isRejected, setIsRejected] = useState(false);
+
+  const { t } = useTranslation("texts");
 
   const handleFileRejected = () => {
     setIsRejected(true);
@@ -52,19 +55,20 @@ export default function FileConvertor() {
     <Form>
       <FormGroup
         role="group"
-        label="Activity file"
-        helperTextInvalid="Invalid activity file"
+        label={t("fileconvertor.form.file.label")}
+        helperTextInvalid={t("fileconvertor.form.file.error")}
         validated={isRejected ? "error" : "default"}
       >
         <FileUpload
           isDisabled={loading}
           value={value}
           filename={filename}
-          filenamePlaceholder="Drag and drop an activity file or select one"
+          filenamePlaceholder={t("fileconvertor.form.file.placeholder")}
           hideDefaultPreview="true"
           validated={isRejected ? "error" : "default"}
           onChange={handleChange}
-          browseButtonText="Select File"
+          browseButtonText={t("fileconvertor.form.file.button.browse")}
+          clearButtonText={t("fileconvertor.form.file.button.clear")}
           dropzoneProps={{
             accept: ".apk",
             onDropRejected: handleFileRejected
